@@ -1,5 +1,6 @@
 'use client';
 import axios from 'axios';
+import axiosInstance from '@/utility/axiosConfig';
 import Form from 'next/form';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
@@ -20,13 +21,23 @@ const Login = () => {
             const response = await axios.post(
                 'http://localhost:4000/users/login',
                 formData,
-                { withCredentials: true }
+                {
+                    withCredentials: true,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
             );
+            if (response.data) {
+                document.cookie = `token=${response.data}; path=/; max-age=86400; samesite=none`;
+                localStorage.setItem('token', response.data);
+                console.log(document.cookie);
+            }
             console.log('Response received');
             console.log(response.data);
             alert('Login successful!');
-            console.log(response.data);
-            // router.push('/dashboard'); // Redirect to dashboard after login
+            console.log(response.data.token);
+            router.push('/Restaurants'); // Redirect to dashboard after login
         } catch (error) {
             console.error('Login failed', error);
         }

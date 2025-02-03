@@ -1,12 +1,14 @@
 'use client';
 import axios from 'axios';
 import { get } from 'http';
+import Link from 'next/link';
 import React from 'react';
 
 interface Restaurant {
     id: number;
     name: string;
     address: string;
+    cuisine: string;
 }
 
 const Restaurants = () => {
@@ -26,12 +28,31 @@ const Restaurants = () => {
                     {restaurants.map((restaurant) => (
                         <div
                             key={restaurant.id}
-                            className="bg-gray-200 p-4 rounded"
+                            className="card bg-base-100 w-96 shadow-xl pb-5 px-3"
                         >
-                            <h2 className="text-xl font-bold">
+                            <figure>
+                                <img
+                                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                                    alt="Shoes"
+                                />
+                            </figure>
+                            <h2 className="my-2 text-xl font-bold card-title">
                                 {restaurant.name}
                             </h2>
-                            <p>{restaurant.address}</p>
+                            <div className="card-actions justify-start">
+                                <div className="badge badge-outline">
+                                    {restaurant.cuisine}
+                                </div>
+                            </div>
+                            <p className="my-3">{restaurant.address}</p>
+                            <div className="card-actions justify-center">
+                                <Link
+                                    href={`./Restaurants/${restaurant.id}`}
+                                    className="btn btn-primary"
+                                >
+                                    View
+                                </Link>
+                            </div>
                         </div>
                     ))}
                 </div>
