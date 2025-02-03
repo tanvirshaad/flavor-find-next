@@ -12,11 +12,16 @@ const CreateRestaurant = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     useEffect(() => {
-        const userId = getUserFromCookie();
-        // if (!userId) {
-        //     setError('Please login first');
-        //     router.push('/Auth/Login');
-        // }
+        const checkAuth = () => {
+            const userId = getUserFromCookie();
+            console.log('UserId from token:', userId);
+            if (!userId) {
+                setError('Please login first');
+                router.push('/Auth/Login');
+            }
+        };
+
+        checkAuth();
     }, [router]);
     const onSubmit = async (data: any) => {
         setLoading(true);

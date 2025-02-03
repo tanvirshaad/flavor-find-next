@@ -1,18 +1,26 @@
+import jwt from 'jsonwebtoken';
+
 export const getUserFromCookie = () => {
-    const token = document.cookie
-        .split('; ')
-        .find((row) => row.startsWith('token='))
-        ?.split('=')[1];
-
-    if (!token) return null;
-
     try {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const payload = JSON.parse(window.atob(base64));
-        return payload.userId;
+        // Try to get token from localStorage instead of cookie
+        const token = localStorage.getItem('token');
+
+        console.log('Found token:', token);
+
+        if (!token) {
+            return null;
+        }
+
+        const decoded = jwt.decode(token);
+        console.log('Decoded token:', decoded);
+
+        if (decoded && typeof decoded === 'object' && 'id' in decoded) {
+            return decoded.id; // Make sure this matches the property name in your JWT
+        }
+
+        return null;
     } catch (error) {
-        console.error('Error parsing token:', error);
+        console.error('Error extracting userId from token:', error);
         return null;
     }
 };

@@ -28,18 +28,19 @@ const Login = () => {
                     },
                 }
             );
+            
             if (response.data) {
-                document.cookie = `token=${response.data}; path=/; max-age=86400; samesite=none`;
                 localStorage.setItem('token', response.data);
-                console.log(document.cookie);
             }
+            
             console.log('Response received');
-            console.log(response.data);
+            console.log('Cookies:', document.cookie);
+            
             alert('Login successful!');
-            console.log(response.data.token);
-            router.push('/Restaurants'); // Redirect to dashboard after login
+            router.push('/Restaurants');
         } catch (error) {
             console.error('Login failed', error);
+            alert('Login failed. Please try again.');
         }
     };
     return (
