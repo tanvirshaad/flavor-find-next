@@ -2,8 +2,12 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import RestaurantReview from '@/app/Reviews/RestaurantReview/page';
 
 const page = ({ params }: { params: Promise<{ id: string }> }) => {
+    const router = useRouter();
     const unwrappedParams = React.use(params);
     const [restaurant, setRestaurant] = React.useState<any>({});
     useEffect(() => {
@@ -16,6 +20,9 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
         };
         getRestuarant();
     }, [unwrappedParams.id]);
+    const handleCreateReservation = (restaurantId: number) => {
+        router.push(`/Reservations/${restaurantId}`);
+    };
 
     return (
         <div className="container mx-auto">
@@ -31,11 +38,19 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
                         {restaurant.closingTime}
                     </p>
                     <p className="text-2xl">Phone: {restaurant.phone}</p>
-                    <button className="bg-black btn glass btn-error mt-3">
+                    <button
+                        onClick={() => handleCreateReservation(restaurant.id)}
+                        className="btn btn-primary mt-2"
+                    >
                         Request For Reservation
                     </button>
                 </div>
             </div>
+            <section>
+                <h1 className='text-2xl font-bold text-center'>Leave a Review</h1>
+                
+                <RestaurantReview restaurantId={restaurant.id} />
+            </section>
         </div>
     );
 };
