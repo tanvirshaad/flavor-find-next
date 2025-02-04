@@ -29,14 +29,14 @@ const Login = () => {
                     },
                 }
             );
-            
+
             if (response.data) {
                 localStorage.setItem('token', response.data);
             }
-            
+
             console.log('Response received');
             console.log('Cookies:', document.cookie);
-            
+
             alert('Login successful!');
             router.push('/Restaurants');
         } catch (error) {

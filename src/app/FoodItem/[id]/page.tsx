@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { use, useEffect } from 'react';
 import Image from 'next/image';
 import { TbCurrencyTaka } from 'react-icons/tb';
+import { getUserFromCookie } from '@/utility/token';
 
 
 const page = ({ params }: { params: Promise<{ id: string }> }) => {
@@ -29,30 +30,52 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
         getSugesstions();
     }, [fooditem.cuisine]);
 
+
+    const handleAddToFavourite = async() => {
+        try {
+            const response = await axios.post(`http://localhost:4000/favourites?foodItemId=${Number(unwrappedParams.id)}`, {
+                userId: getUserFromCookie(),
+                foodItemId: Number(unwrappedParams.id),
+                
+                status: 'active'
+            });
+            
+            if (response.status === 200) {
+                alert('Added to favourite');
+            }
+        } catch (error: any) {
+            console.error('Error adding to favourites:', error.response?.data || error.message);
+            alert('Failed to add to favourites. Please try again.');
+        }
+    }
+
     return (
-        <div className="container mx-auto">
-            <div className="flex justify-center gap-5 items-center py-3 mt-5">
+        <div className="container mx-auto my-5">
+            <div className='flex justify-center items-center'>
+                <div className="card card-side bg-base-100 shadow-xl max-w-4xl">
                 <div>
-                    <h1 className="text-center text-4xl">{fooditem.name}</h1>
+                    
                     <Image
                         src={fooditem.image}
-                        alt={''}
+                        alt={'image'}
                         width={300}
                         height={300}
                     />
                 </div>
 
-                <div>
-                    <p className="text-2xl">Cuisine: {fooditem.cuisine}</p>
-                    <p className="text-2xl">Phone: {fooditem.phone}</p>
+                <div className='card-body'>
+                    <h1 className="card-title">{fooditem.name}</h1>
+                    <p className="text-1xl">Cuisine: {fooditem.cuisine}</p>
+                    <p className="text-1xl">Phone: {fooditem.phone}</p>
 
-                    <button className="bg-black btn glass btn-error mt-3">
-                        Add to Favourite
-                    </button>
+                    <div className="card-actions justify-end">
+                        <button onClick={handleAddToFavourite} className="btn btn-primary">Add To Favourite</button>
+                    </div>
                 </div>
             </div>
+            </div>
             {/* suggestions */}
-            <section className="container mx-auto py-5 mt-10">
+            <section className="container mx-auto py-5 mt-20">
                 <h1 className=" text-4xl">More Like This...</h1>
                 <div className="grid grid-cols-3 gap-4 mt-5">
                     {suggestions.map((suggestion: any) => (

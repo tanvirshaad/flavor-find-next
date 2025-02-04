@@ -34,12 +34,11 @@ const FoodItem = () => {
                     {foodItems.map((fooditem) => (
                         <div
                             key={fooditem.id}
-                            className="card bg-base-100 w-96 shadow-xl pb-5 px-3"
+                            className="card bg-base-100 w-96 shadow-xl pb-5 px-3 mt-3"
                         >
                             <figure>
                                 <img
-                                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                                    alt="Shoes"
+                                    src={fooditem.image}
                                 />
                             </figure>
                             <h2 className="my-2 text-xl font-bold card-title">
