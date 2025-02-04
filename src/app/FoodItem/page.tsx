@@ -2,6 +2,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
+import { TbCurrencyTaka } from "react-icons/tb";
 
 interface FoodItem {
     id: number;
@@ -16,7 +17,7 @@ const FoodItem = () => {
 
     const getFoodItem = async () => {
         try {
-            const items = await axios.get('http://localhost:4000/food-items');
+            const items = await axios.get('http://localhost:4000/food-items/all');
             setFoodItems(items.data);
         } catch (err: any) {
             console.error(err);
@@ -49,7 +50,10 @@ const FoodItem = () => {
                                     {fooditem.cuisine}
                                 </div>
                             </div>
-                            <p className="my-3">{fooditem.price}</p>
+                            <p className="my-3 flex items-center">
+                                {fooditem.price}
+                                <TbCurrencyTaka className="inline-block ml-1" />
+                            </p>
                             <p className="my-3">{fooditem.description}</p>
                             <div className="card-actions justify-center">
                                 <Link
@@ -58,12 +62,7 @@ const FoodItem = () => {
                                 >
                                     View
                                 </Link>
-                                <Link
-                                    href={`./FoodItem/${fooditem.id}`}
-                                    className="btn btn-primary"
-                                >
-                                    Add To Favourites
-                                </Link>
+                                
                             </div>
                         </div>
                     ))}

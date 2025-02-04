@@ -4,6 +4,7 @@ import axiosInstance from '@/utility/axiosConfig';
 import Form from 'next/form';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import Link from 'next/link';
 axios.defaults.withCredentials = true;
 
 const Login = () => {
@@ -74,6 +75,7 @@ const Login = () => {
                     >
                         Login
                     </button>
+                    <Link href={'/Auth/Registration'}>New Here?</Link>
                 </Form>
             </div>
         </div>

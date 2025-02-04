@@ -2,6 +2,8 @@
 import axios from 'axios';
 import React, { use, useEffect } from 'react';
 import Image from 'next/image';
+import { TbCurrencyTaka } from 'react-icons/tb';
+
 
 const page = ({ params }: { params: Promise<{ id: string }> }) => {
     const unwrappedParams = React.use(params);
@@ -20,7 +22,7 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
     useEffect(() => {
         const getSugesstions = async () => {
             const suggestions = await axios.get(
-                `http://localhost:4000/food-items/?cuisine=${fooditem.cuisine}`
+                `http://localhost:4000/food-items/cusine/?cuisine=${fooditem.cuisine}`
             );
             setSuggestions(suggestions.data);
         };
@@ -45,21 +47,21 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
                     <p className="text-2xl">Phone: {fooditem.phone}</p>
 
                     <button className="bg-black btn glass btn-error mt-3">
-                        Request For Reservation
+                        Add to Favourite
                     </button>
                 </div>
             </div>
             {/* suggestions */}
-            <section className="">
-                <h1 className="text-center text-4xl">Suggestions</h1>
-                <div className="grid grid-cols-3 gap-4">
+            <section className="container mx-auto py-5 mt-10">
+                <h1 className=" text-4xl">More Like This...</h1>
+                <div className="grid grid-cols-3 gap-4 mt-5">
                     {suggestions.map((suggestion: any) => (
                         <div
                             key={suggestion.id}
                             className="card bg-base-100 w-96 shadow-xl pb-5 px-3"
                         >
                             <figure>
-                                <img src={suggestion.image} alt="Shoes" />
+                                <img src={suggestion.image} alt="item" />
                             </figure>
                             <h2 className="my-2 text-xl font-bold card-title">
                                 {suggestion.name}
@@ -69,7 +71,10 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
                                     {suggestion.cuisine}
                                 </div>
                             </div>
-                            <p className="my-3">{suggestion.price}</p>
+                            <p className="my-3 flex items-center">
+                                {fooditem.price}
+                                <TbCurrencyTaka className="inline-block ml-1" />
+                            </p>
                             <p className="my-3">{suggestion.description}</p>
                         </div>
                     ))}

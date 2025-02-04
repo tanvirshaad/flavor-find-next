@@ -15,7 +15,7 @@ export const getUserFromCookie = () => {
         console.log('Decoded token:', decoded);
 
         if (decoded && typeof decoded === 'object' && 'id' in decoded) {
-            return decoded.id; // Make sure this matches the property name in your JWT
+            return decoded.id;
         }
 
         return null;
