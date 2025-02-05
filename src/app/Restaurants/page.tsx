@@ -24,14 +24,14 @@ const Restaurants = () => {
 
     return (
         <div>
-            <div className="container mx-auto">
+            <div className="container mx-auto my-36">
                 <h1 className="text-2xl font-bold text-center">Restaurants</h1>
 
                 <div className="grid grid-cols-3 gap-4">
                     {restaurants.map((restaurant) => (
                         <div
                             key={restaurant.id}
-                            className="card bg-base-100 w-96 shadow-xl pb-5 px-3"
+                            className="card bg-base-100 w-96 shadow-xl pb-5 px-3 mb-10"
                         >
                             <figure>
                                 <img src={restaurant.image} />

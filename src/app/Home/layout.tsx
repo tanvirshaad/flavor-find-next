@@ -92,13 +92,22 @@ export default function Layout({
                         <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-black text-white">
                             <li>
                                 <a
-                                    href="/Home"
+                                    href="#"
                                     className="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
                                     aria-current="page"
                                 >
                                     Home
                                 </a>
                             </li>
+                            {/* <li>
+                                <a
+                                    href=""
+                                    className="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                                    aria-current="page"
+                                >
+                                    Home
+                                </a>
+                            </li> */}
                             <li>
                                 <a
                                     href="/Restaurants"
@@ -119,7 +128,7 @@ export default function Layout({
                             </li>
                             <li>
                                 <a
-                                    href="/FoodItem"
+                                    href="/FoodItems"
                                     className="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
                                     aria-current="page"
                                 >
@@ -128,7 +137,7 @@ export default function Layout({
                             </li>
                             <li>
                                 <a
-                                    href="/FoodItem/CreateFoodItem"
+                                    href="/FoodItems/CreateFoodItem"
                                     className="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
                                     aria-current="page"
                                 >

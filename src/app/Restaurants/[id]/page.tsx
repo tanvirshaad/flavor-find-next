@@ -71,8 +71,8 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
                         </button>
                     </div>
                 </div>
-                <section className="container mx-auto">
-                    <h1>Our Menu</h1>
+                <section className="container mx-auto my-20">
+                    <h1 className="text-4xl text-center">Our Menu</h1>
                     {/* show fooditems in card */}
                     {foodItems.map((foodItem: any) => (
                         <div
