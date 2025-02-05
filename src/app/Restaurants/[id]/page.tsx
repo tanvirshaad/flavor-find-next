@@ -42,9 +42,9 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
             <div className="container mx-auto">
                 <h1 className="text-center text-6xl">{restaurant.name}</h1>
                 <div className="flex justify-around items-center py-5 mt-5">
-                    <Image
-                        src=""
-                        alt={restaurant.name}
+                    <img
+                        src={restaurant.image}
+                        alt={'image'}
                         width={500}
                         height={500}
                     />
@@ -80,10 +80,7 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
                             className="card bg-base-100 w-96 shadow-xl pb-5 px-3"
                         >
                             <figure>
-                                <img
-                                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                                    alt="Shoes"
-                                />
+                                <img src={foodItem.image} />
                             </figure>
                             <h2 className="my-2 text-xl font-bold card-title">
                                 {foodItem.name}
