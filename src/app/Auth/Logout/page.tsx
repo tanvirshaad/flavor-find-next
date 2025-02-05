@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 
-const logout = () => {
+const Logout = () => {
     const handleLogout = async () => {
         try {
             const response = await axios.get(
@@ -28,4 +28,4 @@ const logout = () => {
     );
 };
 
-export default logout;
+export default Logout;

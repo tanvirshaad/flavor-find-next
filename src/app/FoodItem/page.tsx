@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
-import { TbCurrencyTaka } from "react-icons/tb";
+import { TbCurrencyTaka } from 'react-icons/tb';
 
 interface FoodItem {
     id: number;
@@ -17,7 +17,9 @@ const FoodItem = () => {
 
     const getFoodItem = async () => {
         try {
-            const items = await axios.get('http://localhost:4000/food-items/all');
+            const items = await axios.get(
+                'http://localhost:4000/food-items/all'
+            );
             setFoodItems(items.data);
         } catch (err: any) {
             console.error(err);
@@ -27,8 +29,10 @@ const FoodItem = () => {
 
     return (
         <div>
-            <div className="container mx-auto">
-                <h1 className="text-2xl font-bold text-center">Restaurants</h1>
+            <div className="container mx-auto my-40">
+                <h1 className="text-2xl font-bold text-center mb-10">
+                    Food Items
+                </h1>
 
                 <div className="grid grid-cols-3 gap-4">
                     {foodItems.map((fooditem) => (
@@ -37,9 +41,7 @@ const FoodItem = () => {
                             className="card bg-base-100 w-96 shadow-xl pb-5 px-3 mt-3"
                         >
                             <figure>
-                                <img
-                                    src={fooditem.image}
-                                />
+                                <img src={fooditem.image} />
                             </figure>
                             <h2 className="my-2 text-xl font-bold card-title">
                                 {fooditem.name}
@@ -61,7 +63,6 @@ const FoodItem = () => {
                                 >
                                     View
                                 </Link>
-                                
                             </div>
                         </div>
                     ))}

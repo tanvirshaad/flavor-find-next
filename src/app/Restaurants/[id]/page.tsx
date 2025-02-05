@@ -24,8 +24,10 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
 
     useEffect(() => {
         const getFoodItems = async () => {
-            const items = await axios.get(`http://localhost:4000/food-items?restaurantId=${unwrappedParams.id}`);
-            if(items?.data) {
+            const items = await axios.get(
+                `http://localhost:4000/food-items?restaurantId=${unwrappedParams.id}`
+            );
+            if (items?.data) {
                 setFoodItems(Array.isArray(items.data) ? items.data : []);
             }
         };
@@ -37,32 +39,42 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
 
     return (
         <>
-        <div className="container mx-auto">
-            <h1 className="text-center text-6xl">{restaurant.name}</h1>
-            <div className="flex justify-around items-center py-5 mt-5">
-                <Image src="" alt={restaurant.name} width={500} height={500} />
-                <div>
-                    <p className="text-2xl">Cuisine: {restaurant.cuisine}</p>
-                    <p className="text-2xl">Address: {restaurant.address}</p>
-                    <p className="text-2xl">Phone: {restaurant.phone}</p>
-                    <p className="text-2xl">
-                        Time: {restaurant.openingTime} -{' '}
-                        {restaurant.closingTime}
-                    </p>
-                    <p className="text-2xl">Phone: {restaurant.phone}</p>
-                    <button
-                        onClick={() => handleCreateReservation(restaurant.id)}
-                        className="btn btn-primary mt-2"
-                    >
-                        Request For Reservation
-                    </button>
+            <div className="container mx-auto">
+                <h1 className="text-center text-6xl">{restaurant.name}</h1>
+                <div className="flex justify-around items-center py-5 mt-5">
+                    <Image
+                        src=""
+                        alt={restaurant.name}
+                        width={500}
+                        height={500}
+                    />
+                    <div>
+                        <p className="text-2xl">
+                            Cuisine: {restaurant.cuisine}
+                        </p>
+                        <p className="text-2xl">
+                            Address: {restaurant.address}
+                        </p>
+                        <p className="text-2xl">Phone: {restaurant.phone}</p>
+                        <p className="text-2xl">
+                            Time: {restaurant.openingTime} -{' '}
+                            {restaurant.closingTime}
+                        </p>
+                        <p className="text-2xl">Phone: {restaurant.phone}</p>
+                        <button
+                            onClick={() =>
+                                handleCreateReservation(restaurant.id)
+                            }
+                            className="btn btn-primary mt-2"
+                        >
+                            Request For Reservation
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <section className='container mx-auto'>
-                <h1>Our Menu</h1>
-                {/* show fooditems in card */}
-                {
-                    foodItems.map((foodItem: any) => (
+                <section className="container mx-auto">
+                    <h1>Our Menu</h1>
+                    {/* show fooditems in card */}
+                    {foodItems.map((foodItem: any) => (
                         <div
                             key={foodItem.id}
                             className="card bg-base-100 w-96 shadow-xl pb-5 px-3"
@@ -92,13 +104,15 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
                             </div> */}
                         </div>
                     ))}
-            </section>
-            <section>
-                <h1 className='text-2xl font-bold text-center'>Leave a Review</h1>
-                
-                <RestaurantReview restaurantId={restaurant.id} />
-            </section>
-        </div>
+                </section>
+                <section>
+                    <h1 className="text-2xl font-bold text-center">
+                        Leave a Review
+                    </h1>
+
+                    <RestaurantReview restaurantId={restaurant.id} />
+                </section>
+            </div>
         </>
     );
 };
